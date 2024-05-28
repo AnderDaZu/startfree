@@ -1,15 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="flex flex-col items-center"> 
+    <img class="max-w-xs" alt="Vue logo" src="./assets/logo.png">
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <CounterComponent/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import CounterComponent from './components/CounterComponent'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // HelloWorld, 
+    CounterComponent
   }
 }
 </script>
