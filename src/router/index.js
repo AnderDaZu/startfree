@@ -19,6 +19,12 @@ const routes = [
     path: '/blog',
     name: 'blog',
     component: () => import('../views/BlogView.vue')
+  },
+  {
+    // :post -> es la forma para definir parámetros dinamicos en la url
+    path: '/blog/:post',
+    name: 'post',
+    component: () => import('../views/PostView.vue')
   }
 ]
 
