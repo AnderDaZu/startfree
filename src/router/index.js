@@ -33,6 +33,22 @@ const routes = [
   },
 
   {
+    // cuando se usen rutas similares donde solo cambian los parámetros dinamicos, una opción para evitar un inconveniente es definir
+    // el tipo de dato del parámetro que usara cada ruta, para ello se puede usar expresiones regulares
+    // otra opción es que a cada ruta agregarle un parametros unico que permita diferenciar la una de la otra
+    // /compras/o/:orderId   --- /compras/p/:productName
+
+    path: '/compras/:orderId(\\d+)',
+    name: 'order',
+    component: () => import('../views/orderView.vue')
+  },
+  {
+    path: '/compras/:productName',
+    name: 'product',
+    component: () => import('../views/productView.vue')
+  },
+
+  {
     path: '/:pathMatch(.*)',
     name: 'not-found',
     component: () => import('../views/NotFound.vue')
