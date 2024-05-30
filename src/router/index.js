@@ -16,6 +16,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    // formas para redireccionar a una url
+    path: '/about',
+    // redirect: '/nosotros', // forma 1
+    redirect: { name: 'about' } // forma 2 (recomendada)
+  },
+  {
     path: '/blog',
     name: 'blog',
     component: () => import('../views/BlogView.vue')
