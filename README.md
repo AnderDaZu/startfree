@@ -25,3 +25,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Install router
 `vur add router`
+
+### Install vuex
+`vue add vuex`
