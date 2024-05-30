@@ -58,6 +58,7 @@ const routes = [
     path: '/users/:user?',
     name: 'users',
     component: () => import('../views/UsersView.vue'),
+    props: true, // permite recibir como props los parámetros que se envian en la url
     children: [
       // rutas hijas - rutas anidadas
       {
@@ -73,7 +74,8 @@ const routes = [
       {
         path: 'courses',
         name: 'users.courses',
-        component: () => import('../views/users/CourseView.vue')
+        component: () => import('../views/users/CourseView.vue'),
+        props: true
       }
     ]
   },

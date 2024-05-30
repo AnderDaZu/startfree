@@ -5,7 +5,7 @@
     <div v-else>
         <h2>Aquí se mostrará el detalle de un usuario</h2>
     </div> -->
-    <h1>Acá encontrarás todo del usuario con id: {{ user_id }}</h1>
+    <h1>Acá encontrarás todo del usuario con id: {{ user }}</h1>
 
     <nav>
         <!-- <router-link to="/users/20">Home User</router-link> | -->
@@ -17,8 +17,8 @@
         <!-- Rutas con nombre -->
         <router-link :to="{name: 'users.index'}">Home User</router-link> |
         <!-- Cuando una ruta depende de un parámetro, este se debe pasar como en los siguientes casos 👇 -->
-        <router-link :to="{name: 'users.profile', params: {user: user_id}}">Perfil</router-link> |
-        <router-link :to="{name: 'users.courses', params: {user: user_id}}">Cursos</router-link>
+        <router-link :to="{name: 'users.profile', params: {user: user}}">Perfil</router-link> |
+        <router-link :to="{name: 'users.courses', params: {user: user}}">Cursos</router-link>
     </nav>
     <router-view/>
 </template>
@@ -28,9 +28,12 @@ export default {
     data(){
         return {
             // is_list: !this.$route.params.user ? true : false,
-            user_id: this.$route.params.user
+            // user_id: this.$route.params.user
         }
-    }
+    },
+    props: [
+        'user' // el valor de este prop se obtiene del valor que se envia en el parámetro user, para esto se debe activar los props en la ruta
+    ]
 }
 </script>
 
