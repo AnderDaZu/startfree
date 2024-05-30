@@ -8,12 +8,18 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
+    path: '/nosotros',
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    // formas para redireccionar a una url
+    path: '/about',
+    // redirect: '/nosotros', // forma 1
+    redirect: { name: 'about' } // forma 2 (recomendada)
   },
   {
     path: '/blog',
@@ -47,12 +53,37 @@ const routes = [
     name: 'product',
     component: () => import('../views/productView.vue')
   },
-
+  {
+    // cuando a algún parametro se le agrega al final ? quiere decir que es opcional
+    path: '/users/:user?',
+    name: 'users',
+    component: () => import('../views/UsersView.vue'),
+    props: true, // permite recibir como props los parámetros que se envian en la url
+    children: [
+      // rutas hijas - rutas anidadas
+      {
+        path: '',
+        name: 'users.index',
+        component: () => import('../views/users/IndexView.vue')
+      },
+      {
+        path: 'profile',
+        name: 'users.profile',
+        component: () => import('../views/users/ProfileView.vue')
+      },
+      {
+        path: 'courses',
+        name: 'users.courses',
+        component: () => import('../views/users/CourseView.vue'),
+        props: true
+      }
+    ]
+  },
   {
     path: '/:pathMatch(.*)',
     name: 'not-found',
     component: () => import('../views/NotFound.vue')
-  }
+  },
 ]
 
 const router = createRouter({
