@@ -47,18 +47,32 @@ const routes = [
     name: 'product',
     component: () => import('../views/productView.vue')
   },
-
+  {
+    // cuando a algún parametro se le agrega al final ? quiere decir que es opcional
+    path: '/users/:user?',
+    name: 'users',
+    component: () => import('../views/UsersView.vue'),
+    children: [
+      // rutas hijas - rutas anidadas
+      {
+        path: '',
+        component: () => import('../views/users/IndexView.vue')
+      },
+      {
+        path: 'profile',
+        component: () => import('../views/users/ProfileView.vue')
+      },
+      {
+        path: 'courses',
+        component: () => import('../views/users/CourseView.vue')
+      }
+    ]
+  },
   {
     path: '/:pathMatch(.*)',
     name: 'not-found',
     component: () => import('../views/NotFound.vue')
   },
-  {
-    // cuando a algún parametro se le agrega al final ? quiere decir que es opcional
-    path: '/users/:user?',
-    name: 'users',
-    component: () => import('../views/UsersView.vue')
-  }
 ]
 
 const router = createRouter({
