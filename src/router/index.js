@@ -52,6 +52,12 @@ const routes = [
     path: '/:pathMatch(.*)',
     name: 'not-found',
     component: () => import('../views/NotFound.vue')
+  },
+  {
+    // cuando a algún parametro se le agrega al final ? quiere decir que es opcional
+    path: '/users/:user?',
+    name: 'users',
+    component: () => import('../views/UsersView.vue')
   }
 ]
 
