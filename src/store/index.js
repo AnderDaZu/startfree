@@ -33,6 +33,9 @@ export default createStore({
       if(state.count > 0) state.count--
 
       if ( state.count == 0 ) state.is_disabled = true
+    },
+    actualizarNombre(state, nombre){
+      state.nombre = nombre
     }
   },
   actions: {

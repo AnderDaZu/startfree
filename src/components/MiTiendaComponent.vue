@@ -1,7 +1,14 @@
 <template>
     <h2>Mi tienda</h2>
 
-    <button @click="decrement" :disabled="is_disabled">Disminuir</button>
+    <h3 class="mt-10">Nombre: {{ nombre }}</h3>
+
+    <form @submit.prevent="actualizarNombreComponente" class="my-10">
+        <input type="text" v-model="nombreComponente">
+        <button class="ml-4">Actualizar nombre</button>
+    </form>
+
+    <button class="mt-10" @click="decrement" :disabled="is_disabled">Disminuir</button>
     <h3>Contador: {{ count }}</h3>
     <button @click="increment">Aumentar</button>    
 
@@ -14,8 +21,17 @@
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex' // para mapear los estados que definimos en store
 export default {
+    data(){
+        return {
+            nombreComponente: ''
+        }
+    },
     methods: {
-        ...mapMutations(['increment', 'decrement']),
+        ...mapMutations(['increment', 'decrement', 'actualizarNombre']),
+        actualizarNombreComponente(){
+            this.actualizarNombre(this.nombreComponente)
+            this.nombreComponente = ''
+        }
         // forma de realizar más larga 👇, forma de realizar lo mismo de manera corta ☝️
         /*
             increment(){
@@ -61,5 +77,25 @@ export default {
 </script>
 
 <style>
+    .my-10 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .mx-10 {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+    .mt-10 {
+        margin-top: 10px;
+    }
+    .mb-10 {
+        margin-bottom: 10px;
+    }
+    .ml-4 {
+        margin-left: 4px;
+    }
+    .mr-4 {
+        margin-right: 4px;
+    }
 
 </style>
