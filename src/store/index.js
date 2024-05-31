@@ -7,6 +7,19 @@ export default createStore({
     apellido: 'Dazu'
   },
   getters: {
+    // para obtener información, definir métodos
+    getFullName: (state) => {
+      return `${state.nombre} ${state.apellido}`
+    },
+    fullNameSize: (state, getters) => {
+      return getters.getFullName.length
+    },
+    nombreSize(state){
+      return state.nombre.length
+    },
+    apellidoSize(state){
+      return state.apellido.length
+    }
   },
   mutations: {
   },
