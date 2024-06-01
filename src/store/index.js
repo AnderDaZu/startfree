@@ -23,6 +23,7 @@ export default createStore({
       return state.apellido.length
     }
   },
+  // para modificar la información de manera sincrona
   mutations: {
     // para modificar la información, definir métodos
     increment(state){
@@ -38,17 +39,24 @@ export default createStore({
       state.nombre = nombre
     }
   },
-  // para realizar llamadas asíncronas
+  // para realizar llamadas asíncronas - actualizar datos de manera asíncrona
   actions: {
     // context -> permite acceder a los estados, getters o mutations
     actualizarNombreAccion({commit}, nombre){ // destructuración de context
     // actualizarNombreAccion(context, nombre){
-      setTimeout(() => {
-        console.log('Actualizado en la base de datos')
-        // commit -> permite ejecutar mutaciones
-        // context.commit('actualizarNombre', nombre) // sin uso de la destructuración
-        commit('actualizarNombre', nombre) // usando la destructuración
-      }, 1500);
+      return new  Promise((resolve) => {
+        setTimeout(() => {
+          // console.log('Actualizado en la base de datos')
+          // commit -> permite ejecutar mutaciones
+          // context.commit('actualizarNombre', nombre) // sin uso de la destructuración
+          commit('actualizarNombre', nombre) // usando la destructuración
+          resolve();
+        }, 1500);
+      });
+    },
+    async confirmarActualizacionNombre({ dispatch }, nombre){
+      await dispatch('actualizarNombreAccion', nombre);
+      console.log('Actualizado en la base de datos');
     }
   },
   modules: {

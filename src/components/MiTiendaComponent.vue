@@ -36,11 +36,15 @@ export default {
         ...mapMutations(['increment', 'decrement']),
         // commit -> permite llamar a la ejecución x método definido en la tienda
         // dispatch -> permite llamar a la ejecución x acción definida en la tienda
-        ...mapActions(['actualizarNombreAccion']),
+        ...mapActions(['actualizarNombreAccion', 'confirmarActualizacionNombre']),
         actualizarNombreComponente(){
             // this.$store.dispatch('actualizarNombreAccion', this.nombreComponente)
-            this.actualizarNombreAccion(this.nombreComponente)
-            this.nombreComponente = ''
+            // this.actualizarNombreAccion(this.nombreComponente).then(() => {
+            //     this.nombreComponente = ''
+            // })
+            this.confirmarActualizacionNombre(this.nombreComponente).then(() => {
+                this.nombreComponente = ''
+            })
         },
 
         // forma de realizar más larga 👇, forma de realizar lo mismo de manera corta ☝️
