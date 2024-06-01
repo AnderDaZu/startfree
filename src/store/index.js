@@ -1,64 +1,18 @@
 import { createStore } from 'vuex'
 
-export default createStore({
-  state: {
-    // para guardar información
-    nombre: 'Anderson',
-    apellido: 'Dazu',
-    count: 1,
-    is_disabled: false
-  },
-  getters: {
-    // para obtener información, definir métodos
-    getFullName: (state) => {
-      return `${state.nombre} ${state.apellido}`
-    },
-    fullNameSize: (state, getters) => {
-      return getters.getFullName.length
-    },
-    nombreSize(state){
-      return state.nombre.length
-    },
-    apellidoSize(state){
-      return state.apellido.length
-    }
-  },
-  // para modificar la información de manera sincrona
-  mutations: {
-    // para modificar la información, definir métodos
-    increment(state){
-      if (state.count == 0) state.is_disabled = false
-      state.count++
-    },
-    decrement(state){
-      if(state.count > 0) state.count--
+import { countModel } from './modules/countModule'
+import userModel from './modules/userModule'
 
-      if ( state.count == 0 ) state.is_disabled = true
-    },
-    actualizarNombre(state, nombre){
-      state.nombre = nombre
-    }
-  },
+export default createStore({
+  // para definir propiedades
+  state: { },
+  getters: { },
+  // para modificar la información de manera sincrona
+  mutations: { },
   // para realizar llamadas asíncronas - actualizar datos de manera asíncrona
-  actions: {
-    // context -> permite acceder a los estados, getters o mutations
-    actualizarNombreAccion({commit}, nombre){ // destructuración de context
-    // actualizarNombreAccion(context, nombre){
-      return new  Promise((resolve) => {
-        setTimeout(() => {
-          // console.log('Actualizado en la base de datos')
-          // commit -> permite ejecutar mutaciones
-          // context.commit('actualizarNombre', nombre) // sin uso de la destructuración
-          commit('actualizarNombre', nombre) // usando la destructuración
-          resolve();
-        }, 1500);
-      });
-    },
-    async confirmarActualizacionNombre({ dispatch }, nombre){
-      await dispatch('actualizarNombreAccion', nombre);
-      console.log('Actualizado en la base de datos');
-    }
-  },
+  actions: { },
   modules: {
+    user: userModel,
+    countM: countModel
   }
 })

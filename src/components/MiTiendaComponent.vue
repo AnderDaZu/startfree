@@ -14,6 +14,7 @@
 
     <h3>Datos del usuario</h3>
     <h4>Nombre: {{ nombre }} - tam: {{ nombreSize }}</h4>
+    <!-- <h4>Nombre: {{ $store.state.user.nombre }} - tam: {{ nombreSize }}</h4> -->
     <h4>Apellido: {{ apellido }} - tam: {{ apellidoSize }}</h4>
     <h4>Nombre completo: {{ getFullName }} - tam: {{ fullNameSize }}</h4>
 </template>
@@ -32,11 +33,11 @@ export default {
             //     this.actualizarNombre(this.nombreComponente)
             //     this.nombreComponente = ''
             // }
-        
-        ...mapMutations(['increment', 'decrement']),
+        // cuando de indica que el namespaced: true en el módelo, se debe establecer el módelo en la siguiente función
+        ...mapMutations('countM', ['increment', 'decrement']),
         // commit -> permite llamar a la ejecución x método definido en la tienda
         // dispatch -> permite llamar a la ejecución x acción definida en la tienda
-        ...mapActions(['actualizarNombreAccion', 'confirmarActualizacionNombre']),
+        ...mapActions('user', ['actualizarNombreAccion', 'confirmarActualizacionNombre']),
         actualizarNombreComponente(){
             // this.$store.dispatch('actualizarNombreAccion', this.nombreComponente)
             // this.actualizarNombreAccion(this.nombreComponente).then(() => {
@@ -58,7 +59,14 @@ export default {
         */
     },
     computed: {
-        ...mapState(['nombre', 'apellido', 'count', 'is_disabled']),
+        // ...mapState(['nombre', 'apellido', 'count', 'is_disabled']),
+        ...mapState({
+            nombre: state => state.user.nombre,
+            apellido: state => state.user.apellido,
+            count: state => state.countM.count,
+            is_disabled: state => state.countM.is_disabled
+            // count: state => state.count
+        }),
         // forma de realizar más larga 👇, forma de realizar lo mismo de manera corta ☝️
         /*
             nombre(){
@@ -68,7 +76,8 @@ export default {
                 return this.$store.state.apellido
             }
         */
-        ...mapGetters(['getFullName', 'fullNameSize', 'nombreSize', 'apellidoSize'])
+        // cuando se trabaja con namespaced: true en los modelos, se debe indicar el modelo en la siguiente funcion 
+        ...mapGetters('user', ['getFullName', 'fullNameSize', 'nombreSize', 'apellidoSize'])
         // forma de realizar más larga 👇, forma de realizar lo mismo de manera corta ☝️
         /*
             nombreSize(){ // opción 1
