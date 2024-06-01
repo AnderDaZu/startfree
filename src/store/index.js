@@ -38,7 +38,18 @@ export default createStore({
       state.nombre = nombre
     }
   },
+  // para realizar llamadas asíncronas
   actions: {
+    // context -> permite acceder a los estados, getters o mutations
+    actualizarNombreAccion({commit}, nombre){ // destructuración de context
+    // actualizarNombreAccion(context, nombre){
+      setTimeout(() => {
+        console.log('Actualizado en la base de datos')
+        // commit -> permite ejecutar mutaciones
+        // context.commit('actualizarNombre', nombre) // sin uso de la destructuración
+        commit('actualizarNombre', nombre) // usando la destructuración
+      }, 1500);
+    }
   },
   modules: {
   }

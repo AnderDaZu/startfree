@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex' // para mapear los estados que definimos en store
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex' // para mapear los estados que definimos en store
 export default {
     data(){
         return {
@@ -27,11 +27,22 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['increment', 'decrement', 'actualizarNombre']),
+        // ...mapMutations(['increment', 'decrement', 'actualizarNombre']),
+        // actualizarNombreComponente(){
+            //     this.actualizarNombre(this.nombreComponente)
+            //     this.nombreComponente = ''
+            // }
+        
+        ...mapMutations(['increment', 'decrement']),
+        // commit -> permite llamar a la ejecución x método definido en la tienda
+        // dispatch -> permite llamar a la ejecución x acción definida en la tienda
+        ...mapActions(['actualizarNombreAccion']),
         actualizarNombreComponente(){
-            this.actualizarNombre(this.nombreComponente)
+            // this.$store.dispatch('actualizarNombreAccion', this.nombreComponente)
+            this.actualizarNombreAccion(this.nombreComponente)
             this.nombreComponente = ''
-        }
+        },
+
         // forma de realizar más larga 👇, forma de realizar lo mismo de manera corta ☝️
         /*
             increment(){
